@@ -109,7 +109,10 @@ final class MovieQuizViewController: UIViewController {
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
             self.showNextQuestionOrResults()
 //            self.imageView.layer.masksToBounds = false
-            self.imageView.layer.borderColor = UIColor.ypWhite.withAlphaComponent(0.5).cgColor
+            self.yesButton.isEnabled = true
+            self.noButton.isEnabled = true
+            self.imageView.layer.borderColor = UIColor.ypWhite.withAlphaComponent(0.0).cgColor
+            
         }
     }
     
@@ -120,6 +123,8 @@ final class MovieQuizViewController: UIViewController {
         let currentQuestion = questions[currentQuestionIndex] // 1
         let givenAnswer = true // 2
         showAnswerResult(isCorrect: givenAnswer == currentQuestion.correctAnswer) // 3
+        yesButton.isEnabled = false
+        noButton.isEnabled = false
 
     }
     
@@ -137,8 +142,8 @@ final class MovieQuizViewController: UIViewController {
     private func showNextQuestionOrResults() {
         if currentQuestionIndex == questions.count - 1 {
           // идём в состояние "Результат квиза"
-            let correctAnswersCount = correctAnswers
-                    let totalQuestionsCount = questions.count
+//            let correctAnswersCount = correctAnswers
+//                    let totalQuestionsCount = questions.count
                     let text = "Ваш результат: \(correctAnswers)/10" // 1
                     let result = QuizResultsViewModel(
                         title: "Этот раунд окончен!",
